@@ -1,39 +1,28 @@
 import { ApplicationRef, Component } from "@angular/core";
 import { Model } from "./repository.model";
 import { Product } from "./product.model";
-
 @Component({
     selector: "app",
     templateUrl: "template.html"
 })
-
 export class ProductComponent {
     model: Model = new Model();
-
-    constructor(ref: ApplicationRef) {
-        (<any>window).appRef = ref;
-        (<any>window).model = this.model;
-    }
-
-    getProductByPosition(position: number): Product {
-        return this.model.getProducts()[position];
-    }
-
     getProduct(key: number): Product {
         return this.model.getProduct(key);
     }
-
     getProducts(): Product[] {
         return this.model.getProducts();
     }
-
-    getProductCount(): number {
-        return this.getProducts().length;
+    selectedProduct: string;
+    getSelected(product: Product): boolean {
+        return product.name == this.selectedProduct;
     }
 
-    targetName: string = "Kayak";
-
-    getKey(index: number, product: Product) {
-        return product.id;
+    newProduct: Product = new Product();
+    get jsonProduct() {
+        return JSON.stringify(this.newProduct);
+    }
+    addProduct(p: Product) {
+        console.log("New Product: " + this.jsonProduct);
     }
 }
