@@ -21,23 +21,24 @@ import { PaDiscountEditorComponent } from "./discountEditor.component";
 import { DiscountService } from "./discount.service";
 import { PaDiscountPipe } from "./discount.pipe";
 import { PaDiscountAmountDirective } from "./discountAmount.directive";
-import { SimpleDataSource } from "./datasource.model";
-import { Model } from "./repository.model";
+//import { SimpleDataSource } from "./datasource.model";
+//import { Model } from "./repository.model";
 import { LogService, LOG_SERVICE, SpecialLogService,
   LogLevel, LOG_LEVEL} from "./log.service";
 import { VALUE_SERVICE, PaDisplayValueDirective} from "./valueDisplay.directive";
+import { ModelModule } from "./model/model.module";
 let logger = new LogService();
 logger.minimumLevel = LogLevel.DEBUG;
 registerLocaleData(localeFr);
 @NgModule({
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, ModelModule],
   declarations: [ProductComponent, PaAttrDirective, PaModel,
     PaStructureDirective, PaIteratorDirective,
     PaCellColor, PaCellColorSwitcher, ProductTableComponent,
     ProductFormComponent, PaToggleView, PaAddTaxPipe,
     PaCategoryFilterPipe, PaDiscountDisplayComponent, PaDiscountEditorComponent,
     PaDiscountPipe, PaDiscountAmountDirective, PaDisplayValueDirective],
-    providers: [DiscountService, SimpleDataSource, Model, LogService,
+    providers: [DiscountService, LogService,
       { provide: VALUE_SERVICE, useValue: "Apples" }],
     bootstrap: [ProductFormComponent, ProductTableComponent]
 })
